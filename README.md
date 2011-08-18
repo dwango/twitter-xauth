@@ -1,6 +1,6 @@
-# twitter.js
+# twitter-xauth.js
 
-## About twitter.js
+## About twitter-xauth.js
 
  - a simple Twitter API Wrapper Class
   - authorization using xAuth
