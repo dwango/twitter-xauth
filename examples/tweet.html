@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <script type="text/javascript" charset="utf-8" src="../lib/sha1.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../lib/oauth.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../lib/twitter.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    
+    var consumerKey       = "DUMMY-CONSUMER-KEY";
+    var consumerSecret    = "DUMMY-CONSUMER-SECRET"
+    var accessToken       = null;
+    var accessTokenSecret = null;
+        
+    function authorize(){
+        var params = {
+            consumerKey    : consumerKey,
+            consumerSecret : consumerSecret,
+            userName       : document.getElementById("user_name").value,
+            password       : document.getElementById("password").value,
+            success : function(token,secret){
+                accessToken = token;
+                accessTokenSecret = secret;
+                document.getElementById("exec_tweet").disabled = false;
+                document.getElementById("tweet").disabled = false;
+                alert("Succeeded. Please input your tweet.")
+            },
+            error : function(code, message){  //optional
+                alert("Failed!"+ code + message);
+                document.getElementById("authorize").disabled = false;
+            }
+        };
+
+        document.getElementById("authorize").disabled = true;
+        Twitter.authorize(params);
+    }
+
+    function tweet(){
+        var params = {
+            consumerKey       : consumerKey,
+            consumerSecret    : consumerSecret,
+            accessToken       : accessToken,
+            accessTokenSecret : accessTokenSecret
+        };
+        var tweetParams = {
+            tweet : document.getElementById("tweet").value,
+            success : function() {
+                alert("Succeeded!");
+            },
+            error : function(code, message) {  //optional
+                alert("Failed!");
+            }
+        }
+        
+        var twitter = new Twitter(params);
+        twitter.tweet(tweetParams);
+    
+    }
+    
+    </script>
+  </head>
+  <body>
+  	  <h1>tweet sample</h1>
+        <div>
+            twitter user name<br />
+            <input id="user_name" type="text" />
+        </div>
+        <div>
+            twitter account password<br />
+            <input id="password" type="password" />
+        </div>
+        <div>
+            tweet<br />
+            <textarea id="tweet" disabled></textarea>
+        </div>
+        <input id="authorize" type="button" onClick="authorize()" value="authorize"/>
+        <input id="exec_tweet" type="button" onClick="tweet()" value="tweet!" disabled/>
+  </body>
+</html>
