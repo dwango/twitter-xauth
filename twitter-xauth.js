@@ -50,7 +50,7 @@ Twitter.errors = {
  * @constant
  */
 Twitter.URLS = {
-    AUTHORIZE : "http://api.twitter.com/oauth/access_token",
+    AUTHORIZE : "https://api.twitter.com/oauth/access_token",
     TWEET     : "http://api.twitter.com/1/statuses/update.json" 
 };
 
