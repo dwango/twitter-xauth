@@ -51,7 +51,7 @@ Twitter.errors = {
  */
 Twitter.URLS = {
     AUTHORIZE : "https://api.twitter.com/oauth/access_token",
-    TWEET     : "http://api.twitter.com/1/statuses/update.json" 
+    TWEET     : "https://api.twitter.com/1/statuses/update.json" 
 };
 
 /**
